@@ -10,12 +10,16 @@
     {
       "src": "/(.*)",
       "dest": "app.js"
+    },
+    {
+      "src": "/send-notification",
+      "dest": "app.js"
     }
   ],
   "crons": [
     {
-      "path": "/api/send-notification",
-      "schedule": "0 9 * * *"
+      "path": "/send-notification",
+      "schedule": "0 10 * * *"
     }
   ]
 }
