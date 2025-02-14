@@ -5,7 +5,17 @@ app.get("/", (req, res) => {
     res.send("Hello from Express on Vercel!");
   });
 
-
+  app.get("/send-notification", async (req, res) => {
+    try {
+        console.log("手動觸發通知...");
+        const message = await getSheetData();
+        await sendLineMessage(message);
+        res.status(200).send("通知發送成功");
+    } catch (error) {
+        console.error("錯誤:", error);
+        res.status(500).send("發送失敗");
+    }
+});
 
 const fs = require("fs");
 const XLSX = require("xlsx");
