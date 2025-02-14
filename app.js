@@ -3,9 +3,9 @@ const app = express();
 
 app.get("/", (req, res) => {
     res.send("Hello from Express on Vercel!");
-  });
+});
 
-  app.get("/send-notification", async (req, res) => {
+app.get("/send-notification", async (req, res) => {
     try {
         console.log("手動觸發通知...");
         const message = await getSheetData();
@@ -79,12 +79,14 @@ async function getSheetData() {
 
 // 發送 LINE 訊息
 async function sendLineMessage(message) {
-    const userIds = [USER_ID, USER_ID_2];
-    try {
-        await client.pushMessage(USER_ID, { type: "text", text: message });
-        console.log("通知發送成功！");
-    } catch (error) {
-        console.error("通知發送失敗：", error.response?.data || error.message);
+    const userIds = [USER_ID, USER_ID_2].filter(id => id);
+    for (const userId of userIds) {
+        try {
+            await client.pushMessage(userId, { type: "text", text: message });
+            console.log(`訊息成功發送給 ${userId}`);
+        } catch (error) {
+            console.error(`發送給 ${userId} 失敗:`, JSON.stringify(error, null, 2));
+        }
     }
 }
 
