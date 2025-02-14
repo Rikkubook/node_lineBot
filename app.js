@@ -23,6 +23,7 @@ const client = new line.Client(config);
 
 // LINE 使用者 ID（手動設定，或使用 webhook 取得）
 const USER_ID = process.env.LINE_USER_ID;
+const USER_ID_2 = process.env.LINE_USER_ID_3;
 
 // Google Sheet
 
@@ -68,8 +69,9 @@ async function getSheetData() {
 
 // 發送 LINE 訊息
 async function sendLineMessage(message) {
+    const userIds = [USER_ID, USER_ID_2];
     try {
-        await client.pushMessage(USER_ID, { type: "text", text: message });
+        await client.pushMessage(userIds, { type: "text", text: message });
         console.log("通知發送成功！");
     } catch (error) {
         console.error("通知發送失敗：", error.response?.data || error.message);
@@ -77,7 +79,7 @@ async function sendLineMessage(message) {
 }
 
 // 設定排程：每月 10、20、30 日上午 9:00 執行 '0 9 10,20,30 * *'
-schedule.scheduleJob("45 10 5,10,14,20,30 * *", async () => {
+schedule.scheduleJob("55 13 5,10,14,20,30 * *", async () => {
     console.log("執行通知排程...");
     const message = await getSheetData();
     await sendLineMessage(message);
