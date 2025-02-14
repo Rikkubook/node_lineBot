@@ -1,3 +1,12 @@
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+    res.send("Hello from Express on Vercel!");
+  });
+
+
+
 const fs = require("fs");
 const XLSX = require("xlsx");
 const schedule = require("node-schedule");
@@ -68,7 +77,7 @@ async function sendLineMessage(message) {
 }
 
 // 設定排程：每月 10、20、30 日上午 9:00 執行 '0 9 10,20,30 * *'
-schedule.scheduleJob("26 9 5,10,14,20,30 * *", async () => {
+schedule.scheduleJob("45 10 5,10,14,20,30 * *", async () => {
     console.log("執行通知排程...");
     const message = await getSheetData();
     await sendLineMessage(message);
@@ -76,3 +85,11 @@ schedule.scheduleJob("26 9 5,10,14,20,30 * *", async () => {
 
     
 console.log("LINE Bot 通知機器人啟動中...");
+
+
+const port = process.env.PORT || 3001;
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
+
+module.exports = app;
