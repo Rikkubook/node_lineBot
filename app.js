@@ -81,7 +81,7 @@ async function getSheetData() {
 async function sendLineMessage(message) {
     const userIds = [USER_ID, USER_ID_2];
     try {
-        await client.pushMessage(userIds, { type: "text", text: message });
+        await client.pushMessage(USER_ID, { type: "text", text: message });
         console.log("通知發送成功！");
     } catch (error) {
         console.error("通知發送失敗：", error.response?.data || error.message);
