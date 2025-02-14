@@ -33,7 +33,7 @@ const client = new line.Client(config);
 
 // LINE 使用者 ID（手動設定，或使用 webhook 取得）
 const USER_ID = process.env.LINE_USER_ID;
-const USER_ID_2 = process.env.LINE_USER_ID_3;
+const USER_ID_2 = process.env.LINE_USER_ID_2;
 
 // Google Sheet
 
