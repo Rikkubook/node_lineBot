@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev": "vercel dev"
   },
   "dependencies": {
     "@line/bot-sdk": "^9.6.0",
