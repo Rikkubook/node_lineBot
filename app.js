@@ -104,7 +104,7 @@ async function getSheetData() {
     if (monthNumber === currentMonth) {
       const money = row._rawData[1]; // 取得伙食金額
       // 加上換行字元，讓月份資訊另起一行
-      messages.push(`家庭記帳本💰\n月份: ${monthValue}, 伙食金額: ${money}`);
+      messages.push(`家庭記帳本💰\n 預計花費9,000\n月份: ${monthValue}, 伙食金額: ${money}`);
     }
   });
   return messages.length > 0 ? messages.join("\n") : "今天沒有需要通知的資料。";

@@ -19,7 +19,7 @@
   "crons": [
     {
       "path": "/send-notification",
-      "schedule": "0 10 5,10,15,25,30 * *"
+      "schedule": "0 10 10,20,30 * *"
     }
   ]
 }
