@@ -102,9 +102,11 @@ async function getSheetData() {
     const monthNumber = parseInt(monthValue);
 
     if (monthNumber === currentMonth) {
-      const money = row._rawData[1]; // 取得伙食金額
+      const estimated = row._rawData[1]; 
+      const money = row._rawData[2]; // 取得伙食金額
+      const available  = row._rawData[3];
       // 加上換行字元，讓月份資訊另起一行
-      messages.push(`家庭記帳本💰\n 預計花費9,000\n月份: ${monthValue}, 伙食金額: ${money}`);
+      messages.push(`家庭記帳本💰\n 月份: ${monthValue}\n 預計花費${estimated}, 伙食金額: ${money}\n 可用餘額: ${available}`);
     }
   });
   return messages.length > 0 ? messages.join("\n") : "今天沒有需要通知的資料。";
@@ -132,9 +134,15 @@ schedule.scheduleJob("55 13 5,10,14,20,30 * *", async () => {
 
 console.log("LINE Bot 通知機器人啟動中...");
 
+// (async()=>{ // 本機測試用
+//   const message = await getSheetData();
+//   await sendLineMessage(message);
+// })();
+
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
 module.exports = app;
+
